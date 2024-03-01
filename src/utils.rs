@@ -708,7 +708,7 @@ mod tests {
     #[test]
     fn test_assert_pixels_eq_passes() {
         let image = gray_image!(
-            00, 01, 02;
+            00, 1, 2;
             10, 11, 12);
 
         assert_pixels_eq!(image, image);
@@ -718,11 +718,11 @@ mod tests {
     #[should_panic]
     fn test_assert_pixels_eq_fails() {
         let image = gray_image!(
-            00, 01, 02;
+            00, 1, 2;
             10, 11, 12);
 
         let diff = gray_image!(
-            00, 11, 02;
+            00, 11, 2;
             10, 11, 12);
 
         assert_pixels_eq!(diff, image);
@@ -731,11 +731,11 @@ mod tests {
     #[test]
     fn test_assert_pixels_eq_within_passes() {
         let image = gray_image!(
-            00, 01, 02;
+            00, 1, 2;
             10, 11, 12);
 
         let diff = gray_image!(
-            00, 02, 02;
+            00, 2, 2;
             10, 11, 12);
 
         assert_pixels_eq_within!(diff, image, 1);
@@ -745,11 +745,11 @@ mod tests {
     #[should_panic]
     fn test_assert_pixels_eq_within_fails() {
         let image = gray_image!(
-            00, 01, 02;
+            00, 1, 2;
             10, 11, 12);
 
         let diff = gray_image!(
-            00, 03, 02;
+            00, 3, 2;
             10, 11, 12);
 
         assert_pixels_eq_within!(diff, image, 1);
