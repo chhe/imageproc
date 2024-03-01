@@ -887,7 +887,7 @@ mod tests {
     #[test]
     fn test_rotate_nearest_zero_radians() {
         let image = gray_image!(
-            00, 01, 02;
+            00, 1, 2;
             10, 11, 12);
 
         let rotated = rotate(
@@ -903,12 +903,12 @@ mod tests {
     #[test]
     fn text_rotate_nearest_quarter_turn_clockwise() {
         let image = gray_image!(
-            00, 01, 02;
+            00, 1, 2;
             10, 11, 12);
 
         let expected = gray_image!(
-            11, 01, 99;
-            12, 02, 99);
+            11, 1, 99;
+            12, 2, 99);
         let c = Projection::translate(1.0, 0.0);
         let rot = c * Projection::rotate(90f32.to_radians()) * c.invert();
 
@@ -919,12 +919,12 @@ mod tests {
     #[test]
     fn text_rotate_nearest_half_turn_anticlockwise() {
         let image = gray_image!(
-            00, 01, 02;
+            00, 1, 2;
             10, 11, 12);
 
         let expected = gray_image!(
             12, 11, 10;
-            02, 01, 00);
+            2, 1, 00);
         let c = Projection::translate(1.0, 0.5);
 
         let rot = c * Projection::rotate((-180f32).to_radians()) * c.invert();
@@ -936,13 +936,13 @@ mod tests {
     #[test]
     fn test_translate_positive_x_positive_y() {
         let image = gray_image!(
-            00, 01, 02;
+            00, 1, 2;
             10, 11, 12;
             20, 21, 22);
 
         let expected = gray_image!(
-            00, 00, 01;
-            00, 00, 01;
+            00, 00, 1;
+            00, 00, 1;
             10, 10, 11);
 
         let translated = translate(&image, (1, 1));
@@ -952,7 +952,7 @@ mod tests {
     #[test]
     fn test_translate_positive_x_negative_y() {
         let image = gray_image!(
-            00, 01, 02;
+            00, 1, 2;
             10, 11, 12;
             20, 21, 22);
 
@@ -968,12 +968,12 @@ mod tests {
     #[test]
     fn test_translate_negative_x() {
         let image = gray_image!(
-            00, 01, 02;
+            00, 1, 2;
             10, 11, 12;
             20, 21, 22);
 
         let expected = gray_image!(
-            01, 02, 02;
+            1, 2, 2;
             11, 12, 12;
             21, 22, 22);
 
@@ -984,7 +984,7 @@ mod tests {
     #[test]
     fn test_translate_large_x_large_y() {
         let image = gray_image!(
-            00, 01, 02;
+            00, 1, 2;
             10, 11, 12;
             20, 21, 22);
 
@@ -1001,13 +1001,13 @@ mod tests {
     #[test]
     fn test_translate_positive_x_positive_y_projection() {
         let image = gray_image!(
-            00, 01, 02;
+            00, 1, 2;
             10, 11, 12;
             20, 21, 22);
 
         let expected = gray_image!(
             00, 00, 00;
-            00, 00, 01;
+            00, 00, 1;
             00, 10, 11);
 
         let translated = warp(
@@ -1022,7 +1022,7 @@ mod tests {
     #[test]
     fn test_translate_positive_x_negative_y_projection() {
         let image = gray_image!(
-            00, 01, 02;
+            00, 1, 2;
             10, 11, 12;
             20, 21, 22);
 
@@ -1043,7 +1043,7 @@ mod tests {
     #[test]
     fn test_translate_large_x_large_y_projection() {
         let image = gray_image!(
-            00, 01, 02;
+            00, 1, 2;
             10, 11, 12;
             20, 21, 22);
 
@@ -1065,13 +1065,13 @@ mod tests {
     #[test]
     fn test_affine() {
         let image = gray_image!(
-            00, 01, 02;
+            00, 1, 2;
             10, 11, 12;
             20, 21, 22);
 
         let expected = gray_image!(
             00, 00, 00;
-            00, 00, 01;
+            00, 00, 1;
             00, 10, 11);
 
         #[rustfmt::skip]
@@ -1090,7 +1090,7 @@ mod tests {
     #[test]
     fn test_affine_bicubic() {
         let image = gray_image!(
-            99, 01, 02, 03, 04;
+            99, 1, 2, 3, 4;
             10, 11, 12, 13, 14;
             20, 21, 22, 23, 24;
             30, 31, 32, 33, 34;
