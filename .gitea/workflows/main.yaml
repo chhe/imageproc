@@ -10,92 +10,47 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-    runs-on: ${{ matrix.os }}
-
-    steps:
-    - name: checkout
-      uses: actions/checkout@v4
-
-    - name: Install rust
-      uses: dtolnay/rust-toolchain@master
-      with:
-          toolchain: stable
-
-    - uses: Swatinem/rust-cache@v2
-      with:
-        cache-all-crates: "true"
-
-    - name: Run cargo build main
-      run: cargo build --all --release 
-
-  unit-test:
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-    runs-on: ${{ matrix.os }}
-
-    steps:
-    - name: checkout
-      uses: actions/checkout@v4
-
-    - name: Install rust
-      uses: dtolnay/rust-toolchain@master
-      with:
-          toolchain: nightly
-
-    - uses: Swatinem/rust-cache@v2
-      with:
-        cache-all-crates: "true"
-     
-    - name: Run cargo test
-      run: cargo test
-
-  check:
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-    runs-on: ${{ matrix.os }}
-
-    steps:
-    - name: checkout
-      uses: actions/checkout@v4
-
-    - name: Install rust
-      uses: dtolnay/rust-toolchain@master
-      with:
-          toolchain: stable
-
-    - uses: Swatinem/rust-cache@v2
-      with:
-        cache-all-crates: "true"       
-
-    - name: Run cargo check
-      run: cargo check
-
-  clippy:
+  build-test-check-clippy:
     runs-on: ubuntu-latest
 
     steps:
     - name: checkout
       uses: actions/checkout@v4
 
-    - name: Install latest rust
+    - name: install rust
       uses: dtolnay/rust-toolchain@master
       with:
-          toolchain: stable
-          components: clippy
+        toolchain: stable
+        components: clippy
 
-    - uses: Swatinem/rust-cache@v2
+    - name: setup rust cache
+      uses: Swatinem/rust-cache@v2
       with:
-        cache-all-crates: "true"   
+        cache-all-crates: "true"
 
-    - name: Run clippy
+    - name: use sccache
+      uses: mozilla-actions/sccache-action@v0.0.4
+      with:
+        version: "v0.7.7"
+
+    - name: run cargo build main
+      run: cargo build --all --release 
+
+    - name: run cargo check
+      run: cargo check
+
+    - name: run clippy
       run: cargo clippy -- -D warnings
-        
+
+    - name: install rust
+      uses: dtolnay/rust-toolchain@master
+      with:
+        toolchain: nightly
+        components: clippy
+
+    - name: run cargo test
+      run: cargo test
+
   format:
     runs-on: ubuntu-latest
 
@@ -106,8 +61,8 @@ jobs:
     - name: Install latest rust
       uses: dtolnay/rust-toolchain@master
       with:
-          toolchain: stable
-          components: rustfmt
+        toolchain: stable
+        components: rustfmt
 
     - name: Format
       run: cargo fmt -- --check
