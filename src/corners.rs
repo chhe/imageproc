@@ -191,10 +191,10 @@ pub fn oriented_fast(
         let mut rng = if let Some(s) = seed {
             StdRng::seed_from_u64(s)
         } else {
-            StdRng::from_entropy()
+            StdRng::from_os_rng()
         };
-        let dist_x = rand::distributions::Uniform::new(min_x, max_x);
-        let dist_y = rand::distributions::Uniform::new(min_y, max_y);
+        let dist_x = rand::distr::Uniform::new(min_x, max_x).unwrap();
+        let dist_y = rand::distr::Uniform::new(min_y, max_y).unwrap();
         let sample_size = NUM_SAMPLE_POINTS.min((width * height) as usize);
         let sample_coords: Vec<Point<u32>> = (0..sample_size)
             .map(|_| Point::new(dist_x.sample(&mut rng), dist_y.sample(&mut rng)))
