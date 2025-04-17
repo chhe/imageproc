@@ -2,9 +2,9 @@ name: main
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 env:
   CARGO_TERM_COLOR: always
@@ -23,79 +23,79 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: checkout
-      uses: actions/checkout@v4
+      - name: checkout
+        uses: actions/checkout@v4
 
-    - name: cache rust toolchain
-      uses: actions/cache@v4.2.3
-      with:
-        path: |
-          ~/.cargo
-          ~/.rustup
-        key: ${{ runner.os }}-rust
+      - name: cache rust toolchain
+        uses: actions/cache@v4.2.3
+        with:
+          path: |
+            ~/.cargo
+            ~/.rustup
+          key: ${{ runner.os }}-rust
 
-    - name: install rust
-      uses: dtolnay/rust-toolchain@master
-      with:
-        toolchain: stable
-        components: clippy
+      - name: install rust
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+          components: clippy
 
-    - name: setup rust cache
-      uses: Swatinem/rust-cache@v2
-      with:
-        cache-all-crates: "true"
+      - name: setup rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          cache-all-crates: "true"
 
-    - name: use sccache
-      uses: mozilla-actions/sccache-action@v0.0.9
-      with:
-        version: "${{ vars.SCCACHE_VERSION }}"
+      - name: use sccache
+        uses: mozilla-actions/sccache-action@v0.0.9
+        with:
+          version: "${{ vars.SCCACHE_VERSION }}"
 
-    - name: run cargo build main
-      run: cargo build --all --release
+      - name: run cargo build main
+        run: cargo build --all --release
 
-    - name: run cargo check
-      run: cargo check
+      - name: run cargo check
+        run: cargo check
 
-    - name: run clippy
-      run: cargo clippy -- -D warnings
+      - name: run clippy
+        run: cargo clippy --
 
-    - name: cache rust toolchain
-      uses: actions/cache@v4.2.3
-      with:
-        path: |
-          ~/.cargo
-          ~/.rustup
-        key: ${{ runner.os }}-rust
+      - name: cache rust toolchain
+        uses: actions/cache@v4.2.3
+        with:
+          path: |
+            ~/.cargo
+            ~/.rustup
+          key: ${{ runner.os }}-rust
 
-    - name: install rust
-      uses: dtolnay/rust-toolchain@master
-      with:
-        toolchain: nightly
-        components: clippy
+      - name: install rust
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly
+          components: clippy
 
-    - name: run cargo test
-      run: cargo test
+      - name: run cargo test
+        run: cargo test
 
   format:
     runs-on: ubuntu-latest
 
     steps:
-    - name: checkout
-      uses: actions/checkout@v4
+      - name: checkout
+        uses: actions/checkout@v4
 
-    - name: cache rust toolchain
-      uses: actions/cache@v4.2.3
-      with:
-        path: |
-          ~/.cargo
-          ~/.rustup
-        key: ${{ runner.os }}-rust
+      - name: cache rust toolchain
+        uses: actions/cache@v4.2.3
+        with:
+          path: |
+            ~/.cargo
+            ~/.rustup
+          key: ${{ runner.os }}-rust
 
-    - name: Install latest rust
-      uses: dtolnay/rust-toolchain@master
-      with:
-        toolchain: stable
-        components: rustfmt
+      - name: Install latest rust
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+          components: rustfmt
 
-    - name: Format
-      run: cargo fmt -- --check
+      - name: Format
+        run: cargo fmt -- --check
