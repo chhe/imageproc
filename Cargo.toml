@@ -18,7 +18,7 @@ display-window = ["sdl2"]
 rayon = ["dep:rayon", "image/rayon"]
 
 [dependencies]
-ab_glyph = { version = "=0.2.29", default-features = false, features = ["std"] }
+ab_glyph = { version = "=0.2.30", default-features = false, features = ["std"] }
 approx = { version = "=0.5.1", default-features = false }
 image = { version = "=0.25.6", default-features = false }
 itertools = { version = "=0.14.0", default-features = false, features = [
