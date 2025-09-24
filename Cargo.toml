@@ -45,7 +45,7 @@ getrandom = { version = "=0.3.3", default-features = false, features = ["wasm_js
 [dev-dependencies]
 assert_approx_eq = "=1.1.0"
 proptest = "=1.8.0"
-wasm-bindgen-test = "=0.3.53"
+wasm-bindgen-test = "=0.3.54"
 
 [package.metadata.docs.rs]
 # See https://github.com/image-rs/imageproc/issues/358
