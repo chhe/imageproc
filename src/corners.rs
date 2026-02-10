@@ -5,7 +5,11 @@ use crate::{
     point::Point,
 };
 use image::{GenericImageView, GrayImage};
-use rand::{SeedableRng, distr::Distribution, rngs::StdRng};
+use rand::{
+    SeedableRng,
+    distr::Distribution,
+    rngs::{StdRng, SysRng},
+};
 
 /// A location and score for a detected corner.
 /// The scores need not be comparable between different
@@ -190,7 +194,7 @@ pub fn oriented_fast(
         let mut rng = if let Some(s) = seed {
             StdRng::seed_from_u64(s)
         } else {
-            SeedableRng::from_os_rng()
+            SeedableRng::try_from_rng(&mut SysRng).unwrap()
         };
         let dist_x = rand::distr::Uniform::new(min_x, max_x).unwrap();
         let dist_y = rand::distr::Uniform::new(min_y, max_y).unwrap();
