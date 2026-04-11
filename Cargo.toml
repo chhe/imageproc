@@ -27,7 +27,7 @@ itertools = { version = "=0.14.0", default-features = false, features = [
 ] }
 nalgebra = { version = "=0.34.2", default-features = false, features = ["std"] }
 num = { version = "=0.4.3", default-features = false }
-rand = { version = "=0.10.0", default-features = false, features = [
+rand = { version = "=0.10.1", default-features = false, features = [
     "thread_rng",
     "sys_rng",
 ] }
