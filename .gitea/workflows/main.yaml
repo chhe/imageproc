@@ -35,18 +35,18 @@ jobs:
           key: ${{ runner.os }}-rust
 
       - name: install rust
-        uses: dtolnay/rust-toolchain@master
+        uses: dtolnay/rust-toolchain@efa25f7f19611383d5b0ccf2d1c8914531636bf9 # master
         with:
           toolchain: stable
           components: clippy
 
       - name: setup rust cache
-        uses: Swatinem/rust-cache@v2
+        uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
         with:
           cache-all-crates: "true"
 
       - name: use sccache
-        uses: mozilla-actions/sccache-action@v0.0.10
+        uses: mozilla-actions/sccache-action@9e7fa8a12102821edf02ca5dbea1acd0f89a2696 # v0.0.10
         with:
           version: "${{ vars.SCCACHE_VERSION }}"
 
@@ -68,7 +68,7 @@ jobs:
           key: ${{ runner.os }}-rust
 
       - name: install rust
-        uses: dtolnay/rust-toolchain@master
+        uses: dtolnay/rust-toolchain@efa25f7f19611383d5b0ccf2d1c8914531636bf9 # master
         with:
           toolchain: nightly
           components: clippy
@@ -92,7 +92,7 @@ jobs:
           key: ${{ runner.os }}-rust
 
       - name: Install latest rust
-        uses: dtolnay/rust-toolchain@master
+        uses: dtolnay/rust-toolchain@efa25f7f19611383d5b0ccf2d1c8914531636bf9 # master
         with:
           toolchain: stable
           components: rustfmt
