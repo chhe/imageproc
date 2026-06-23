@@ -22,7 +22,7 @@ text = ["dep:ab_glyph"]
 ab_glyph = { version = "=0.2.32", default-features = false, features = ["std"], optional = true}
 approx = { version = "=0.5.1", default-features = false }
 image = { version = "=0.25.10", default-features = false }
-itertools = { version = "=0.14.0", default-features = false, features = [
+itertools = { version = "=0.15.0", default-features = false, features = [
     "use_std",
 ] }
 nalgebra = { version = "=0.35.0", default-features = false, features = ["std"] }
